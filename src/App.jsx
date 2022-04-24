@@ -1,16 +1,16 @@
 import Axios from "axios";
 import { useState } from 'react';
-import './App.css';
+import './App.scss';
 
 function App() {
   const [pokemonName, setPokemonName] = useState("");
   const [pokemon, setPokemon] = useState("");
   const [pokemonChosen, setpokemonChosen] = useState(false);
-
+  const [error, setError] = useState(false);
 
   const searchPokemon = () => {
-    Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
-      ({ data }) => {
+    Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+      .then(({ data }) => {
         console.log(data);
         setPokemon({
           name: pokemonName,
@@ -23,10 +23,11 @@ function App() {
           speed: data.stats[5].base_stat,
           type: data.types[0].type.name,
         });
-        setpokemonChosen(true)
+        setpokemonChosen(true);
+        setError(false);
       }
     ).catch(error => {
-      console.log('Pokemon no encontrado');
+      setError(true);
     });
   };
 
@@ -34,11 +35,15 @@ function App() {
     <div className="App">
       <div className="TitleSection">
         <h1>Pokédex</h1>
-        <input type="text" onChange={event => setPokemonName(event.target.value.toLowerCase())} />
+        <input type="text" className="field_input" onChange={(event) => setPokemonName(event.target.value.toLowerCase())} />
         <div>
-          {pokemonName && <button onClick={searchPokemon}>Search Pokémon</button>}
+          {pokemonName && <button className="button" onClick={searchPokemon}>Search Pokémon</button>}
+          {error && (
+            <p className="menssage menssage--error">Pockemon no existe</p>
+            )}
         </div>
       </div>
+
       <div className="DisplaySection">
         {
           !pokemonChosen ? (
@@ -56,6 +61,7 @@ function App() {
               <h4>Speed: {pokemon.speed}</h4>
             </>
           )
+         
         }
       </div>
     </div>

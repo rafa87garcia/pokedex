@@ -21,16 +21,18 @@ body {
   color: #e7e7e6;
 }
 
-.TitleSection input {
-  width: 200px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid #5e98b1;
-  font-size: 18px;
-  padding-left: 10px;
+.field {
+  &__input {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #5e98b1;
+    font-size: 18px;
+    padding-left: 10px;
+  }
 }
 
-.TitleSection button {
+.button {
   width: 180px;
   height: 40px;
   margin: 20px;
@@ -39,11 +41,10 @@ body {
   padding-left: 10px;
   border: none;
   color: #e7e7e6;
-  background-color: #006cbf
-}
-
-.TitleSection button:hover {
-  cursor: pointer;
+  background-color: #006cbf;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .DisplaySection {
@@ -56,4 +57,27 @@ body {
   background-color: dimgrey;
   border-radius: 3rem;
   margin-top: 4rem;
+}
+
+.menssage {
+  border: 0.1rem solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  animation: slide-bottom .5s;
+
+  &--error {
+    background-color: red;
+    color: white;
+  }
+}
+
+@keyframes slide-bottom {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
